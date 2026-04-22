@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>secret lab 💌</title>
+
+<style>
+body{
+  margin:0;
+  font-family:-apple-system, Arial;
+  background:#0f172a;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  color:white;
+}
+
+.box{
+  width:340px;
+  text-align:center;
+}
+
+/* toggle buttons */
+.modes button{
+  margin:5px;
+  padding:8px 12px;
+  border:none;
+  border-radius:10px;
+  background:#1e293b;
+  color:white;
+  cursor:pointer;
+}
+
+/* NGL card */
+.card{
+  background:white;
+  color:black;
+  border-radius:18px;
+  overflow:hidden;
+}
+
+.top{
+  background:linear-gradient(45deg,#ff6fa5,#ffb86c);
+  padding:12px;
+  color:white;
+  font-weight:bold;
+}
+
+.question{
+  padding:18px;
+}
+
+/* chat style */
+.chat{
+  text-align:left;
+  margin-top:20px;
+}
+
+.bubble{
+  background:#1e293b;
+  padding:12px;
+  border-radius:14px;
+  margin:6px 0;
+  display:inline-block;
+}
+
+.me{
+  background:#ff6fa5;
+  color:white;
+  float:right;
+}
+
+/* reply */
+.reply{
+  margin-top:20px;
+  font-size:20px;
+}
+
+/* inputs */
+input{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border-radius:10px;
+  border:none;
+}
+
+/* button */
+.generate{
+  margin-top:10px;
+  padding:12px;
+  width:100%;
+  border:none;
+  border-radius:12px;
+  background:#ff6fa5;
+  color:white;
+  font-weight:bold;
+}
+
+/* hidden */
+.hidden{ display:none; }
+
+/* small meta */
+.meta{
+  font-size:12px;
+  margin-top:6px;
+  opacity:0.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<div class="modes">
+  <button onclick="setMode('card')">📩 card</button>
+  <button onclick="setMode('chat')">💬 chat</button>
+  <button onclick="setMode('dark')">🌙 dark</button>
+</div>
+
+<!-- CARD -->
+<div id="card" class="mode">
+  <div class="card">
+    <div class="top">send me anonymous messages 💌</div>
+    <div class="question" id="q1">question...</div>
+  </div>
+  <div class="reply" id="r1">reply...</div>
+  <div class="meta" id="seen1"></div>
+</div>
+
+<!-- CHAT -->
+<div id="chat" class="mode hidden">
+  <div class="chat">
+    <div class="bubble" id="q2">question...</div>
+    <div class="bubble me" id="r2">reply...</div>
+  </div>
+</div>
+
+<!-- DARK -->
+<div id="dark" class="mode hidden">
+  <div style="background:#020617;padding:20px;border-radius:16px">
+    <div id="q3">question...</div>
+    <div class="reply" id="r3">reply...</div>
+  </div>
+</div>
+
+<input id="inputQ" placeholder="type question...">
+<input id="inputR" placeholder="type reply...">
+
+<button class="generate" onclick="gen()">generate 🚀</button>
+
+</div>
+
+<script>
+let current = "card";
+
+function setMode(m){
+  current = m;
+  document.querySelectorAll(".mode").forEach(e=>e.classList.add("hidden"));
+  document.getElementById(m).classList.remove("hidden");
+}
+
+function gen(){
+  let q = document.getElementById("inputQ").value;
+  let r = document.getElementById("inputR").value;
+
+  document.getElementById("q1").innerText=q;
+  document.getElementById("r1").innerText=r;
+
+  document.getElementById("q2").innerText=q;
+  document.getElementById("r2").innerText=r;
+
+  document.getElementById("q3").innerText=q;
+  document.getElementById("r3").innerText=r;
+
+  let num = Math.floor(Math.random()*50)+10;
+  document.getElementById("seen1").innerText =
+    "seen by "+num+" people 👀";
+}
+</script>
+
+</body>
+</html>
